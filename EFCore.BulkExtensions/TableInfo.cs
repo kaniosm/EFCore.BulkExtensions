@@ -471,7 +471,7 @@ namespace EFCore.BulkExtensions
         /// <param name="entities"></param>
         /// <param name="setColumnMapping"></param>
         /// <param name="progress"></param>
-        public void SetSqlBulkCopyConfig<T>(Microsoft.Data.SqlClient.SqlBulkCopy sqlBulkCopy, IList<T> entities, bool setColumnMapping, Action<decimal> progress)
+        public void SetSqlBulkCopyConfig<T>(System.Data.SqlClient.SqlBulkCopy sqlBulkCopy, IList<T> entities, bool setColumnMapping, Action<decimal> progress)
         {
             sqlBulkCopy.DestinationTableName = InsertToTempTable ? FullTempTableName : FullTableName;
             sqlBulkCopy.BatchSize = BulkConfig.BatchSize;
@@ -555,7 +555,7 @@ namespace EFCore.BulkExtensions
 
         protected async Task<int> GetNumberUpdatedAsync(DbContext context, CancellationToken cancellationToken, bool isAsync)
         {
-            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(Microsoft.Data.SqlClient.SqlParameter));
+            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(System.Data.SqlClient.SqlParameter));
             resultParameter.ParameterName = "@result";
             resultParameter.DbType = DbType.Int32;
             resultParameter.Direction = ParameterDirection.Output;
@@ -575,7 +575,7 @@ namespace EFCore.BulkExtensions
 
         protected async Task<int> GetNumberDeletedAsync(DbContext context, CancellationToken cancellationToken, bool isAsync)
         {
-            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(Microsoft.Data.SqlClient.SqlParameter));
+            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(System.Data.SqlClient.SqlParameter));
             resultParameter.ParameterName = "@result";
             resultParameter.DbType = DbType.Int32;
             resultParameter.Direction = ParameterDirection.Output;

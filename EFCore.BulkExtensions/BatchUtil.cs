@@ -236,7 +236,7 @@ namespace EFCore.BulkExtensions
                         if (param == null)
                         {
                             propertyUpdateValue ??= DBNull.Value;
-                            param = new Microsoft.Data.SqlClient.SqlParameter();
+                            param = new System.Data.SqlClient.SqlParameter();
                             param.ParameterName = $"@{columnName}";
                             param.Value = propertyUpdateValue;
                             if (!isDifferentFromDefault && propertyUpdateValue == DBNull.Value && property.PropertyType == typeof(byte[])) // needed only when having complex type property to be updated to default 'null'
@@ -489,7 +489,7 @@ namespace EFCore.BulkExtensions
             var sqlParameter = TryCreateRelationalMappingParameter(columnName, paramName, value, tableInfo);
             if (sqlParameter == null)
             {
-                sqlParameter = new Microsoft.Data.SqlClient.SqlParameter(paramName, value ?? DBNull.Value);
+                sqlParameter = new System.Data.SqlClient.SqlParameter(paramName, value ?? DBNull.Value);
                 var columnType = tableInfo.ColumnNamesTypesDict[columnName];
                 if (value == null && columnType.Contains(DbType.Binary.ToString(), StringComparison.OrdinalIgnoreCase)) //"varbinary(max)".Contains("binary")
                 {
@@ -522,7 +522,7 @@ namespace EFCore.BulkExtensions
             {
                 var relationalTypeMapping = propertyInfo.GetRelationalTypeMapping();
 
-                using var dbCommand = new Microsoft.Data.SqlClient.SqlCommand();
+                using var dbCommand = new System.Data.SqlClient.SqlCommand();
                 return relationalTypeMapping.CreateParameter(dbCommand, parameterName, value, propertyInfo.IsNullable);
             }
             catch (Exception) { }

@@ -1,6 +1,6 @@
 ﻿using EFCore.BulkExtensions.Helpers;
 using EFCore.BulkExtensions.SqlAdapters;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NetTopologySuite.Geometries;
